@@ -1,7 +1,5 @@
 # CharPool
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/char_pool`. To experiment with that code, run `bin/console` for an interactive prompt.
-
 This gem will iterate over your chars set, for example if you have chars set ['a', 'b', 'c'], this gem will produce
 
 ```ruby

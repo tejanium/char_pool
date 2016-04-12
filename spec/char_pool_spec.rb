@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 EXPECTATIONS = %w(
   a
@@ -113,5 +114,12 @@ describe CharPool do
     (0..100_000).to_a.each do |index|
       expect(char_pool.index(char_pool.index_at(index))).to eql index
     end
+  end
+
+  it 'works for big number' do
+    char_pool = CharPool.new(('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a)
+    index     = 100_000_000_000_000
+
+    expect(char_pool.index(char_pool.index_at(index))).to eql index
   end
 end

@@ -2,7 +2,7 @@ require 'char_pool/version'
 
 class CharPool
   def initialize(char_pool)
-    @char_pool = char_pool
+    @char_pool = char_pool.map &:to_s
   end
 
   def start(current = @char_pool.first)
@@ -35,6 +35,7 @@ class CharPool
   private
     def decode(string)
       array = string.split('').map do |char|
+
                 @char_pool.index(char)
               end
 
