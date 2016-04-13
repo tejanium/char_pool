@@ -2,7 +2,10 @@ require 'char_pool/version'
 
 class CharPool
   def initialize(char_pool)
-    @char_pool = char_pool.map &:to_s
+    raise(ArgumentError, 'Pool should be array') unless char_pool.is_a?(Array)
+    raise(ArgumentError, 'Pool cannot be empty') if char_pool.empty?
+
+    @char_pool = char_pool.uniq.map &:to_s
   end
 
   def start(current = @char_pool.first)
@@ -34,8 +37,9 @@ class CharPool
 
   private
     def decode(string)
-      array = string.split('').map do |char|
+      return string.length if @char_pool.length == 1
 
+      array = string.split('').map do |char|
                 @char_pool.index(char)
               end
 
@@ -47,7 +51,8 @@ class CharPool
     end
 
     def encode(number)
-      return [0] if number.zero?
+      return [0]          if number.zero?
+      return [0] * number if @char_pool.length == 1
 
       seq_index = 0
       length    = @char_pool.length

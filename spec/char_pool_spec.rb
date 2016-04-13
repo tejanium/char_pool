@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 EXPECTATIONS = %w(
   a
@@ -121,5 +120,20 @@ describe CharPool do
     index     = 100_000_000_000_000
 
     expect(char_pool.index(char_pool.index_at(index))).to eql index
+  end
+
+  it 'works for smallest set' do
+    char_pool = CharPool.new(['a'])
+    index     = 2
+
+    expect(char_pool.index(char_pool.index_at(index))).to eql index
+  end
+
+  it 'raise ArgumentError if pool is empty' do
+    expect { CharPool.new([]) }.to raise_error ArgumentError
+  end
+
+  it 'raise ArgumentError unless pool is array' do
+    expect { CharPool.new(nil) }.to raise_error ArgumentError
   end
 end
