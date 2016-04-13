@@ -1,6 +1,6 @@
 # CharPool
 
-This gem will iterate over your chars set, for example if you have chars set ['a', 'b', 'c'], this gem will produce
+This gem will iterate over your chars set, for example if you have chars set `['a', 'b', 'c']`, this gem will produce
 
 ```ruby
 0  = a
@@ -31,29 +31,7 @@ This gem will iterate over your chars set, for example if you have chars set ['a
 19 = acb
 20 = acc
 
-21 = baa
-22 = bab
-23 = bac
-
-24 = bba
-25 = bbb
-26 = bbc
-
-27 = bca
-28 = bcb
-29 = bcc
-
-30 = caa
-31 = cab
-32 = cac
-
-33 = cba
-34 = cbb
-35 = cbc
-
-36 = cca
-37 = ccb
-38 = ccc
+...
 
 39 = aaaa
 
@@ -89,15 +67,18 @@ char_pool.next  #=> c
 char_pool.next  #=> aa
 char_pool.next  #=> ab
 char_pool.next  #=> ac
-
-char_pool.index_of(9)  #=> ca
-char_pool.index_of(39) #=> aaaa
-
-char_pool.index('ca')   #=> 9
-char_pool.index('aaaa') #=> 39
 ```
 
-TODO: more example and usage
+You can use this as a drop replacement for your URL shortener engine.
+No need to store your shortened URL as key and value in database, you can just encode database id as the key.
+
+```ruby
+char_pool = CharPool.new(('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a)
+
+char_pool.index_at(100_000_000_000_000) #=> BxHCH9jC
+
+char_pool.index('BxHCH9jC') #=> 100_000_000_000_000
+```
 
 ## Development
 
